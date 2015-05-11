@@ -119,6 +119,8 @@ public class MainActivity extends FragmentActivity implements
             // Enabling MyLocation Layer of Google Map
             googleMap.setMyLocationEnabled(true);
 
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
                     .addApi(Plus.API)
@@ -305,14 +307,10 @@ public class MainActivity extends FragmentActivity implements
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-
-
-
         if(loggedInUser == null)
             return;
 
-        logger.info("Getting frnds" );
+
         List<UserResponse> tempSet = new ArrayList<UserResponse>();
         new FrienzoAdapter().updateFriendLocations(markers, googleMap, loggedInUser.getId());
 
